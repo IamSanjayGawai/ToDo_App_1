@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/home.css">
+    <script src="https://kit.fontawesome.com/74fa1c3d56.js" crossorigin="anonymous"></script>
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+
+    <div class="outer-phone">
+
+        <div class="form-section">
+            <form action="/createTodo" method="POST">
+
+                <!-- input task -->
+                <div class="task-info">
+                    <input type="text" name="task" placeholder="What do you want to do?" required>
+                </div>
+
+                <!-- choose category -->
+                <div class="category-options">
+                    <select name="category" required>
+                        <option value="" disabled selected>Select your option</option>
+                        <option>Personal</option>
+                        <option>Work</option>
+                        <option>Study</option>
+                        <option>Exercise</option>
+                    </select>
+
+                </div>
+
+                <!-- due date -->
+                <div class="dueDate-section">
+
+                    <input type="date" name="date" placeholder="Enter Due Date">
+                </div>
+
+                <div class="create-button-section">
+                    <button type="submit">Add</button>
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+        <!-- task-view section -->
+
+        <div class="task-container">
+
+
+            <% for (let i of todolist) { %>
+            <div class="task-bar">
+                <!-- checkbox -->
+              <div class="check-box-button">
+                <input type="checkbox" name="checkbox">
+              </div>
+
+
+              <!-- print tasks -->
+              <div class="task-info-due-date-show">
+                <p class="task-info-print" style="font-weight: bolder;"> <%= i.task %> </p>
+                <p class="task-date-print" style="color: rgb(0, 0, 0); font-size: 0.7rem;"> <%= i.date %> </p>
+              </div>
+
+              <div class="category-show">
+              <%= i.category %>
+              </div>
+
+              <div class="edit-button-section">
+                <button type="submit"><a href="/editTodo/?id=<%=i._id %>"><i class="fa-solid fa-pen-to-square"></i></a></button>
+            </div>
+              <div class="delete-button-section">
+                <button type="submit"> <a href="/deleteTodo/?id=<%= i._id %>"> <i class="fa-solid fa-trash"> </a></i></button>
+            </div>
+
+            </div>
+
+            <% } %>
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
